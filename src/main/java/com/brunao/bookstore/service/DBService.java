@@ -2,7 +2,6 @@ package com.brunao.bookstore.service;
 
 import java.util.Arrays;
 
-import org.apache.tomcat.util.digester.ArrayStack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class DBService {
 	@Autowired
 	LivroRepository livroRepository;
 	
-	public void instanciaDBservice() {
+	public void initDbTest() {
 		
 		Categoria cat1 = new Categoria(null, "Informática", "programação");
 		Categoria cat2 = new Categoria(null, "ficção cientifica", "xxxx");
