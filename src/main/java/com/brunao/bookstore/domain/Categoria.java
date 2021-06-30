@@ -2,6 +2,7 @@ package com.brunao.bookstore.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -60,6 +61,9 @@ public class Categoria implements Serializable{
 	}
 
 	public List<Livro> getLivros() {
+		if(livros == null) {
+			livros = new LinkedList<>();
+		}
 		return livros;
 	}
 
