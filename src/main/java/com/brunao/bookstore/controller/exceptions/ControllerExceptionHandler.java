@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.brunao.bookstore.exception.ObjectNotFoundException;
+import com.brunao.bookstore.exception.StandartError;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {

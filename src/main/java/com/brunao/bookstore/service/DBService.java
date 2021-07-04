@@ -25,8 +25,8 @@ public class DBService {
 		Categoria cat3 = new Categoria(null, "Terror", "Maiores de 18 anos");
 		
 		Livro l1 = new Livro(null, "codigo limpo", "não sei", "xxxxxxxsx", cat1);
-		Livro l2 = new Livro(null, "eu robo", "não sei", "yyyyyyyyy", cat2);
 		Livro l3 = new Livro(null, "dominando android", "nelson glauber", "xxxxxx", cat1);
+		Livro l2 = new Livro(null, "eu robo", "não sei", "yyyyyyyyy", cat2);
 		Livro l4 = new Livro(null, "it a coisa", "stephen king", "A coisa", cat3);
 		Livro l5 = new Livro(null, "A torre negra", "stephen king", "A torre negra", cat3);
 		

@@ -1,5 +1,8 @@
 package com.brunao.bookstore.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.brunao.bookstore.domain.Categoria;
+import com.brunao.bookstore.domain.dto.CategoriaDTO;
 import com.brunao.bookstore.service.CategoriaService;
 
 @RestController
@@ -24,7 +28,10 @@ public class CategoriaController {
 	}
 	
 	@GetMapping(value = "/all")
-	public Iterable<Categoria> findAll(){
-		return service.findAll();
+	public ResponseEntity<List<CategoriaDTO>> findAll(){
+		List<Categoria> listCat = service.findAll();
+		List<CategoriaDTO> listDTO =listCat.stream().map(c -> new CategoriaDTO(c)).collect(Collectors.toList()); 
+	
+		return ResponseEntity.ok().body(listDTO);
 	}
 }

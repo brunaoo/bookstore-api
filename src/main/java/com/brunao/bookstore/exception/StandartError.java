@@ -1,4 +1,4 @@
-package com.brunao.bookstore.controller.exceptions;
+package com.brunao.bookstore.exception;
 
 public class StandartError {
 
