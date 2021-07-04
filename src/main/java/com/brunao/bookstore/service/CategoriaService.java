@@ -37,6 +37,7 @@ public class CategoriaService implements CrudService<Categoria> {
 
 	@Override
 	public void delete(Integer id) {
+		findOne(id);
 		categoriaRepository.deleteById(id);
 	}
 
