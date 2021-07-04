@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.brunao.bookstore.exception.ObjectAssociatedException;
 import com.brunao.bookstore.exception.ObjectNotFoundException;
 import com.brunao.bookstore.exception.StandartError;
 
@@ -17,5 +18,12 @@ public class ControllerExceptionHandler {
 	public ResponseEntity<StandartError> objectNotFoundException(ObjectNotFoundException e, ServletRequest request){
 		StandartError error = new StandartError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), e.getMessage());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}
+	
+
+	@ExceptionHandler(ObjectAssociatedException.class)
+	public ResponseEntity<StandartError> objectAssociatedException(ObjectAssociatedException e, ServletRequest request){
+		StandartError error = new StandartError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), e.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 }
