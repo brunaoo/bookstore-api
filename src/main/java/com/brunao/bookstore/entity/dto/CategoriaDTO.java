@@ -1,8 +1,8 @@
-package com.brunao.bookstore.domain.dto;
+package com.brunao.bookstore.entity.dto;
 
 import java.util.Objects;
 
-import com.brunao.bookstore.domain.Categoria;
+import com.brunao.bookstore.entity.Categoria;
 
 public class CategoriaDTO {
 

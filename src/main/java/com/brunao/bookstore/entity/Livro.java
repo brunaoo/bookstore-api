@@ -1,4 +1,4 @@
-package com.brunao.bookstore.domain;
+package com.brunao.bookstore.entity;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -5,8 +5,8 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.brunao.bookstore.domain.Categoria;
-import com.brunao.bookstore.domain.Livro;
+import com.brunao.bookstore.entity.Categoria;
+import com.brunao.bookstore.entity.Livro;
 import com.brunao.bookstore.repository.CategoriaRepository;
 import com.brunao.bookstore.repository.LivroRepository;
 

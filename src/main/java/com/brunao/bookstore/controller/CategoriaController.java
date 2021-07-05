@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.brunao.bookstore.domain.Categoria;
-import com.brunao.bookstore.domain.dto.CategoriaDTO;
+import com.brunao.bookstore.entity.Categoria;
+import com.brunao.bookstore.entity.dto.CategoriaDTO;
 import com.brunao.bookstore.service.CategoriaService;
 
 @RestController
-@RequestMapping(value = "/categorias/")
+@RequestMapping(value = "/v1/categorias/")
 public class CategoriaController {
 
 	@Autowired

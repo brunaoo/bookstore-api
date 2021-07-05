@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import com.brunao.bookstore.domain.Categoria;
+import com.brunao.bookstore.entity.Categoria;
 import com.brunao.bookstore.exception.ObjectAssociatedException;
 import com.brunao.bookstore.exception.ObjectNotFoundException;
 import com.brunao.bookstore.repository.CategoriaRepository;

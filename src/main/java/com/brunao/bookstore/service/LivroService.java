@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.brunao.bookstore.domain.Livro;
+import com.brunao.bookstore.entity.Livro;
 import com.brunao.bookstore.exception.ObjectNotFoundException;
 import com.brunao.bookstore.repository.LivroRepository;
 
@@ -16,6 +16,9 @@ public class LivroService implements CrudService<Livro>{
 
 	@Autowired
 	LivroRepository livroRepository;
+	
+	@Autowired
+	CategoriaService categoriaService;
 
 	@Override
 	public List<Livro> findAll() {
@@ -39,6 +42,12 @@ public class LivroService implements CrudService<Livro>{
 	public void delete(Integer id) {
 		findOne(id);
 		livroRepository.deleteById(id);
+	}
+
+	
+	public List<Livro> findAllByCategoria(Integer idCategoria) {
+		categoriaService.findOne(idCategoria);
+		return livroRepository.findAllBycategoria(idCategoria);
 	}
 	
 	
