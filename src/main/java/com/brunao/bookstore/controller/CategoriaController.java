@@ -19,19 +19,25 @@ import com.brunao.bookstore.entity.Categoria;
 import com.brunao.bookstore.entity.dto.CategoriaDTO;
 import com.brunao.bookstore.service.CategoriaService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(value = "Categorias")
 @RestController
-@RequestMapping(value = "/v1/categorias/")
+@RequestMapping(value = "/v1/categorias")
 public class CategoriaController {
 
 	@Autowired
 	private CategoriaService service;
 	
+	@ApiOperation(value = "categoria pelo seu id")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Categoria> findById(@PathVariable Integer id){
 		Categoria categoria = service.findOne(id);
 		return ResponseEntity.ok().body(categoria);
 	}
 	
+	@ApiOperation(value = "todas as categorias")
 	@GetMapping(value = "/all")
 	public ResponseEntity<List<CategoriaDTO>> findAll(){
 		List<Categoria> listCat = service.findAll();
@@ -40,13 +46,15 @@ public class CategoriaController {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
-	@PostMapping(value = "save")
+	@ApiOperation(value = "Cria nova Categoria")
+	@PostMapping(value = "/save")
 	public ResponseEntity<Categoria> create(@RequestBody Categoria categoria){
 		categoria = service.save(categoria);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(categoria);
 	}
 	
+	@ApiOperation(value = "deletar categoria pelo id")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);

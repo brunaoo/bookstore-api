@@ -35,6 +35,7 @@ public class CategoriaService implements CrudService<Categoria> {
 
 	@Override
 	public Categoria save(Categoria entity) {
+		entity.setId(0);
 		return categoriaRepository.save(entity);
 	}
 
