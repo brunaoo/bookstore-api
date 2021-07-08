@@ -35,7 +35,7 @@ public class CategoriaService implements CrudService<Categoria> {
 
 	@Override
 	public Categoria save(Categoria entity) {
-		entity.setId(0);
+		entity.setId(null);
 		return categoriaRepository.save(entity);
 	}
 
@@ -47,6 +47,12 @@ public class CategoriaService implements CrudService<Categoria> {
 		} catch (DataIntegrityViolationException e) {
 			throw new ObjectAssociatedException("Categoria não pode ser deletada! Contém livros associados.");
 		}
+	}
+
+	@Override
+	public Categoria update(Categoria categoria) {
+		findOne(categoria.getId());
+		return categoriaRepository.save(categoria);
 	}
 
 }

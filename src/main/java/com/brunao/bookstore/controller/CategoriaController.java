@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,14 +31,14 @@ public class CategoriaController {
 	@Autowired
 	private CategoriaService service;
 	
-	@ApiOperation(value = "categoria pelo seu id")
+	@ApiOperation(value = "Categoria pelo seu id")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Categoria> findById(@PathVariable Integer id){
 		Categoria categoria = service.findOne(id);
 		return ResponseEntity.ok().body(categoria);
 	}
 	
-	@ApiOperation(value = "todas as categorias")
+	@ApiOperation(value = "Todas as categorias")
 	@GetMapping(value = "/all")
 	public ResponseEntity<List<CategoriaDTO>> findAll(){
 		List<Categoria> listCat = service.findAll();
@@ -46,15 +47,22 @@ public class CategoriaController {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
-	@ApiOperation(value = "Cria nova Categoria")
-	@PostMapping(value = "/save")
+	@ApiOperation(value = "Nova Categoria")
+	@PostMapping
 	public ResponseEntity<Categoria> create(@RequestBody Categoria categoria){
 		categoria = service.save(categoria);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
 		return ResponseEntity.created(uri).body(categoria);
 	}
 	
-	@ApiOperation(value = "deletar categoria pelo id")
+	@ApiOperation(value = "Atualiza dados da categoria")
+	@PutMapping
+	public ResponseEntity<Categoria> update(@RequestBody Categoria categoria){
+		categoria = service.update(categoria);
+		return ResponseEntity.ok().body(categoria);
+	}
+	
+	@ApiOperation(value = "Deletar categoria pelo id")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);

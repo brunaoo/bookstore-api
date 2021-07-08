@@ -1,5 +1,6 @@
 package com.brunao.bookstore.controller;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,9 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.brunao.bookstore.entity.Livro;
 import com.brunao.bookstore.entity.dto.LivroDTO;
@@ -21,7 +26,7 @@ import io.swagger.annotations.ApiOperation;
 
 @Api(value = "Livros")
 @RestController
-@RequestMapping("/v1/livros/")
+@RequestMapping("/v1/livros")
 public class LivroController {
 	
 	@Autowired
@@ -48,13 +53,29 @@ public class LivroController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@ApiOperation(value = "todos os livro pelo id da categoria")
+	@ApiOperation(value = "Todos os livro pelo id da categoria")
 	@GetMapping(value = "/allbycategoria/")
 	public ResponseEntity<List<LivroDTO>> findAllbyCategoria(@RequestParam(value = "categoria", defaultValue = "0") Integer idCategoria){
 		List<Livro> listaLivros = livroService.findAllByCategoria(idCategoria);
 		List<LivroDTO> listaDTO = listaLivros.stream().map(l -> new LivroDTO(l)).collect(Collectors.toList());
 		
 		return ResponseEntity.ok().body(listaDTO);
+	}
+	
+	@ApiOperation(value = "Novo livro")
+	@PostMapping
+	public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0" ) Integer idcat, @RequestBody Livro livro){
+		Livro novoLivro = livroService.save(livro, idcat);
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/{id}").buildAndExpand(novoLivro.getId()).toUri();
+		return ResponseEntity.created(uri).body(novoLivro);
+	}
+	
+		
+	@ApiOperation(value = "Atualizar dados do livro")
+	@PutMapping(value = "{id}")
+	public ResponseEntity<Livro> update(@PathVariable Integer id, @RequestBody Livro livro){
+		livro = livroService.update(id, livro);
+		return ResponseEntity.ok().body(livro);
 	}
 	
 }

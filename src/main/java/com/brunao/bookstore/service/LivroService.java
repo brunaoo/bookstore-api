@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.brunao.bookstore.entity.Categoria;
 import com.brunao.bookstore.entity.Livro;
 import com.brunao.bookstore.exception.ObjectNotFoundException;
 import com.brunao.bookstore.repository.LivroRepository;
@@ -35,7 +36,15 @@ public class LivroService implements CrudService<Livro>{
 
 	@Override
 	public Livro save(Livro entity) {
+		entity.setId(null);
 		return livroRepository.save(entity);
+	}
+	
+	public Livro save(Livro livro, Integer idCategoria) {
+		livro.setId(null);
+		Categoria categoria = categoriaService.findOne(idCategoria);
+		livro.setCategoria(categoria);
+		return livroRepository.save(livro);
 	}
 
 	@Override
@@ -48,6 +57,20 @@ public class LivroService implements CrudService<Livro>{
 	public List<Livro> findAllByCategoria(Integer idCategoria) {
 		categoriaService.findOne(idCategoria);
 		return livroRepository.findAllBycategoria(idCategoria);
+	}
+
+	@Override
+	public Livro update(Livro entity) {
+		findOne(entity.getId());
+		return livroRepository.save(entity);
+	}
+
+	public Livro update(Integer id, Livro livro) {
+		Livro newl = findOne(id);
+		newl.setTitulo(livro.getTitulo());
+		newl.setNomeAutor(livro.getNomeAutor());
+		newl.setTexto(livro.getTexto());
+		return livroRepository.save(newl);
 	}
 	
 	
